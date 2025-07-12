@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Birthday Wishes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .message {
+            display: none;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-yes {
+            background-color: #51cf66;
+            color: white;
+        }
+        
+        .btn-yes:hover {
+            background-color: #40c057;
+            transform: translateY(-3px);
+        }
+        
+        .btn-no {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .btn-no:hover {
+            background-color: #f03e3e;
+            transform: translateY(-3px);
+        }
+        
+        .gift-box {
+            margin: 30px auto;
+            width: 150px;
+            height: 150px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gift-box:hover {
+            transform: translateY(-10px);
+        }
+        
+        .gift-box img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: red;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0;
+        }
+        
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            display: none;
+        }
+        
+        .final-message {
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .bounce {
+            animation: bounce 1s infinite;
+        }
+        
+        .flower-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .flower {
+            width: 80px;
+            height: 80px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .flower:hover {
+            transform: scale(1.2) rotate(15deg);
+        }
+        
+        .photo-frame {
+            margin: 30px auto;
+            width: 250px;
+            height: 250px;
+            border: 15px solid #fff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .photo-frame:hover img {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .gift-box {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .photo-frame {
+                width: 200px;
+                height: 200px;
+                border-width: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="message1" class="message active">
+            <h1>🎉 Happy Birthday! 🎉</h1>
+            <p>Someone very special has a birthday today...</p>
+            <div class="photo-frame">
+                <img src="img1.jpg" alt="Woman smiling with birthday cake and balloons" />
+            </div>
+            <p>Would you like to receive your birthday wishes?</p>
+            <div class="btn-container">
+                <button class="btn btn-yes" onclick="nextMessage(1)">YES!</button>
+                <button class="btn btn-no" onclick="nextMessage(1)">Of Course!</button>
+            </div>
+        </div>
+        
+        <div id="message2" class="message">
+            <h1>For Someone Wonderful</h1>
+            <p>Today we celebrate the day you came into this world...</p>
+            <div class="flower-container">
+                <img class="flower" src="flower1.jpg" alt="Red rose bouquet" onclick="showHearts()" />
+                <img class="flower" src="flower2.jpg" alt="White lilies arrangement" onclick="showHearts()" />
+                <img class="flower" src="flower3.jpg" alt="Sunflower bouquet" onclick="showHearts()" />
+                <img class="flower" src="flower4.jpg" alt="Pink peonies bouquet" onclick="showHearts()" />
+                <img class="flower" src="flower5.jpg" alt="Purple orchids arrangement" onclick="showHearts()" />
+            </div>
+            <p>Here are some flowers for your special day!</p>
+            <div class="btn-container">
+                <button class="btn btn-yes" onclick="nextMessage(2)">Thank You!</button>
+            </div>
+        </div>
+        
+        <div id="message3" class="message">
+            <h1>A Special Gift for You</h1>
+            <p>I have prepared something special for your birthday...</p>
+            <div class="gift-box bounce" onclick="openGift(3)">
+                <img src="box.png" alt="Gift box with golden bow on purple wrapping" />
+            </div>
+            <p>Click on the gift box to open your surprise!</p>
+        </div>
+        
+        <div id="message4" class="message">
+            <h1>You're Amazing!</h1>
+            <p>Here's what makes you so special:</p>
+            <ul style="text-align: left; margin: 20px auto; max-width: 600px;">
+                <li>Your beautiful smile that lights up any room</li>
+                <li>Your kind heart that cares for everyone</li>
+                <li>Your strength that inspires those around you</li>
+                <li>Your intelligence that makes every conversation worthwhile</li>
+            </ul>
+            <p>Would you like to hear more?</p>
+            <div class="btn-container">
+                <button class="btn btn-yes" onclick="nextMessage(4)">Yes Please!</button>
+                <button class="btn btn-no" onclick="nextMessage(4)">Show More</button>
+            </div>
+        </div>
+        
+        <div id="message5" class="message">
+            <h1>Memories Together</h1>
+            <p>Some of my favorite moments with you:</p>
+            <div class="photo-frame">
+                <img src="pic2.jpg" alt="Couple celebrating birthday together" />
+            </div>
+            <p>Every moment with you becomes a beautiful memory.</p>
+            <div class="btn-container">
+                <button class="btn btn-yes" onclick="nextMessage(5)">❤️</button>
+            </div>
+        </div>
+        
+        <div id="message6" class="message">
+            <h1>The Final Surprise</h1>
+            <p>For your birthday, I wish you:</p>
+            <ul style="text-align: left; margin: 20px auto; max-width: 600px;">
+                <li>Health and happiness all year round</li>
+                <li>Success in everything you do</li>
+                <li>Love that grows stronger each day</li>
+                <li>All your dreams coming true</li>
+            </ul>
+            <p>Are you ready for your birthday wish?</p>
+            <div class="btn-container">
+                <button class="btn btn-yes" onclick="showFinalMessage()">Yes!</button>
+            </div>
+        </div>
+        
+        <div id="message7" class="message">
+            <h1>Happy Birthday!</h1>
+            <div class="final-message">
+                May your birthday be as wonderful, beautiful and special as you are! Wishing you a day filled with happiness and love, and a year ahead full of joy and success. Thank you for being you! ❤️
+            </div>
+            <div class="photo-frame" style="margin-top: 30px;">
+                <img src="pic.jpg" alt="Birthday celebration with cake and decorations" />
+            </div>
+            <div style="margin-top: 30px;">
+                <button class="btn btn-yes" onclick="location.reload()">Play Again</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="confetti" id="confetti"></div>
+    
+    <script>
+        let currentMessage = 1;
+        
+        function nextMessage(messageNum) {
+            document.getElementById(`message${currentMessage}`).classList.remove('active');
+            currentMessage = messageNum + 1;
+            document.getElementById(`message${currentMessage}`).classList.add('active');
+            showHearts();
+        }
+        
+        function openGift(messageNum) {
+            showConfetti();
+            setTimeout(() => {
+                nextMessage(messageNum);
+            }, 2000);
+        }
+        
+        function showFinalMessage() {
+            showConfetti();
+            document.getElementById(`message${currentMessage}`).classList.remove('active');
+            currentMessage = 7;
+            document.getElementById(`message${currentMessage}`).classList.add('active');
+        }
+        
+        function showHearts() {
+            for (let i = 0; i < 10; i++) {
+                createHeart();
+            }
+        }
+        
+        function showConfetti() {
+            const confetti = document.getElementById('confetti');
+            confetti.style.display = 'block';
+            
+            for (let i = 0; i < 100; i++) {
+                createConfetti();
+            }
+            
+            setTimeout(() => {
+                confetti.innerHTML = '';
+                confetti.style.display = 'none';
+            }, 5000);
+        }
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.classList.add('heart');
+            
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = 2 + Math.random() * 3 + 's';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+        
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('heart');
+            
+            // Random shapes
+            const shapes = ['❤️', '✨', '🎉', '🎈', '🎁'];
+            confetti.innerHTML = shapes[Math.floor(Math.random() * shapes.length)];
+            
+            // Random colors
+            const colors = ['#ff6b6b', '#51cf66', '#fcc419', '#339af0', '#845ef7'];
+            confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.fontSize = (10 + Math.random() * 20) + 'px';
+            confetti.style.animationDuration = 3 + Math.random() * 4 + 's';
+            
+            document.getElementById('confetti').appendChild(confetti);
+        }
+        
+        // Initial animation
+        setTimeout(() => {
+            showHearts();
+        }, 1000);
+    </script>
+</body>
+</html>
